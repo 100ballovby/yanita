@@ -57,3 +57,41 @@ void task2_5() {
     cout << "Сумма элементов главной диагонали: " << summ << endl;
     cout << "Произведение элементов побочной диагонали: " << mult << endl;
 }
+
+void task3_5() {
+    int n;
+    cout << "Размер марицы: ";
+    cin >> n;
+    int **matrix = new int *[n];
+    for (int i = 0; i < n; i++) {
+        matrix[i] = new int[n];
+        matrix[i][i] = randint(0, 2);
+    }
+    cout << "Матрица: " << endl;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << matrix[i][j] << ", ";
+        }
+        cout << endl;
+    }
+
+    cout << "Разворот на 90" << endl;
+    for (int i = 0; i < n; i++) {
+        for (int j = n - 1; j > -1; j--) {
+            cout << matrix[j][i] << ", ";
+        }
+        cout << endl;
+    }
+
+    for (int i = 0; i < n; i++) {
+        matrix[i] = nullptr;  // удаляю строки
+    }
+    matrix = nullptr;  // удаляю саму матрицу
+
+    /**
+    for (int i = 0; i < n; i++) {
+        delete [] matrix[i];  // удаляю строки
+    }
+    delete [] matrix;  // удаляю саму матрицу
+     * **/
+}
