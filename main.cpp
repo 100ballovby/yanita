@@ -1,86 +1,111 @@
 #include <iostream>
+#include <string>
+#include <cmath>
 using namespace std;
 
-void char_type() {
-    char a;
-    cout << "Insert keyboard symbol: ";
-    cin >> a;
-    cout << "Symbol is: " << a << endl;
-    cout << "Symbol \nnumber \tis: " << (int)a << endl;
+void string_basics() {
+    string s = "Hello!";
+    cout << s.size() << endl;
+    s += "go";
+    cout << s << endl;
+    cout << s.size() << endl;
 }
 
-void cin_char() {
-    char arr[5] = {'h', 'e', 'l', 'l', 'o'};
-    char arr1[10];
-    cout << arr << endl;
-    cout << arr1 << endl;
+void string_getline() {
+    string phrase;
+    string phrase2;
+    cout << "Insert phrase: ";
+    getline(cin, phrase);  // чтобы записать текст с пробелами в строку
+    cout << phrase << endl;
+    cout << "Insert phrase 2: ";
+    getline(cin, phrase2);
+    cout << phrase2 << endl;
 }
 
-void getchar_method() {
-    int symbol, i = 0;
-    char arr[20];
-    cout << "Insert characters, press Enter to stop" << endl;
+void string_search() {
+    string str;
+    cout << "string: ";
+    getline(cin, str);
 
-    do {
-        symbol = getchar();
-        arr[i] = symbol;
-        i++;
-    } while (symbol != '\n');
-
-    cout << arr << endl;
-}
-
-void lab6_task1() {
-    char st[80];
-    int symbol, i = 0;
-    cout << "Enter string, cancel with Enter: ";
-    do {
-        symbol = getchar();
-        st[i] = symbol;
-        i++;
-    } while (symbol != '\n');
-
-    int count_one = 0;
-    int countn = 0;
-    int counterror = 0;
-    for (int i = 0; i < 80; i++) {
-        if (st[i] == '1') {
-            count_one++;
-        } else if (st[i] == '0') {
-            if (count_one % 2 && count_one > 1) {  // если одиночные единички нужны, уберите && и до конца
-                countn += count_one;
-            }
-            count_one = 0;
-        } else {
-            counterror++;
-        }
-    }
-
-
-    if (count_one % 2) {
-        countn += count_one;
-    }
-    if (counterror) {
-        cout << "There is restricted symbols in string!" << endl;
-    }
-    cout << countn << endl;
-}
-
-void lab6_task2() {
-    char str[80] = "subs, isub, csub.";
-    char s1[80];
-    int j = 0;
-    for (int i = 0; str[i]; i++) {
-        s1[i + j] = str[i];
+    for (int i = 0; i < str.size(); i++) {
         if (str[i] == ',') {
-            s1[i + j + 1] = '!';
-            j++;
+            str[i] = '.';
+            str[i + 1] = '.';
         }
     }
-    cout << s1 << endl;
+    cout << str;
 }
 
+// ЗАДАЧА №6
+
+int Fact(int N)
+{
+    if (N == 1)
+        return 1;
+    else
+        return N * Fact(N - 1);
+}
+
+void lab6_task6() {
+    string str;
+    int x, y, p;
+    getline(cin, str);
+    sort(str.begin(), str.end());
+    x = y = 0;
+    p = 1;
+    for (int i = y; str[i]; i++)
+    {
+        if (str[i] == str[i+1])
+        {
+            x++;
+        }
+        else
+        {
+            y = x;
+            x++;
+            if (x > 1)
+                p *= Fact(x);
+            x = 0;
+        }
+    }
+    cout << Fact(str.size()) / p << endl;
+}
+
+// КОНЕЦ ЗАДАЧИ №6
+
+// Задача №7
+bool check_palindromes(string word) {
+    int n = word.length();
+    transform(word.begin(), word.end(), word.begin(), ::tolower);
+
+    if (n > 2) {  // если в слове более трех букв
+        for (int i = 0; i < n; i++, n--) {
+            if (word[i] != word[n - 1]) {
+                return false;
+            }
+        }
+        return true;
+    } else {
+        return false;
+    }
+
+}
+// КОНЕЦ ЗАДАЧИ №7
 
 int main(){
+    const int LETTERS_IN_ALPHABET = 26;
+    string s1, s2;
+    cout << "Enter prefix: ";
+    cin >> s1;
+    cout << "Enter suffix: ";
+    cin >> s2;
+
+    int length;
+    cout << "Full length of the string: ";
+    cin >> length;
+
+    long double between = length - (s1.size() + s2.size());
+    cout << "Number of possible variants is: " << endl;
+    cout << pow(LETTERS_IN_ALPHABET, between) * 2;
     return 0;
 }

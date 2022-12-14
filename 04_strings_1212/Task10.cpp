@@ -1,7 +1,7 @@
 ﻿#include <iostream>
 using namespace std;
 
-int main(){
+int zapusk(){
     long long n, n1, n2, N1, N2;
     long long razmer = 100, k1 = 1, k2 = 1,  d = 0;
     cout << "Розетки: ";
